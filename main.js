@@ -1,4 +1,4 @@
-
+let Forecast = null;
 //get WoeID
 const getWoe = async (Location) => {
     const data = await fetch(`https://www.metaweather.com/api/location/search/?query=${Location}`).then(async (res) => await res.json()).then(async (json) => await json);
@@ -14,7 +14,6 @@ const getForecast = async (Location, Date) => {
 const getData = async (Location) => {
     const output = {
         consolidatedWeather:[],
-        forecast:[]
     }
     const woeID = await getWoe(Location);
     console.log(woeID)
@@ -22,18 +21,17 @@ const getData = async (Location) => {
         var today = new Date();
         var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+i);
         let result = await getForecast(woeID[0].woeid, date);
-        console.log("this is result" + i + result)
         output.consolidatedWeather[i] = result[0];
     }
     return output;
 }
 
-async function cast (Location){
+const cast = async (Location) =>{
     const data = await getData(Location)
-    return data;
+    return await data
 }
 
 //change this function to change cities
 document.addEventListener('DOMContentLoaded', async() => {
-    console.log(await cast("London"))
+    Forecast = await cast("London");
 })
