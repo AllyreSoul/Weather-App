@@ -1,3 +1,4 @@
+
 let Forecast = null;
 //get WoeID
 const getWoe = async (Location) => {
@@ -22,13 +23,14 @@ const getData = async (Location) => {
         var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+i);
         let result = await getForecast(woeID[0].woeid, date);
         output.consolidatedWeather[i] = result[0];
-    }
+        
+    };
     return output;
 }
 
 const cast = async (Location) =>{
-    const data = await getData(Location)
-    return await data
+        const data = await getData(Location)
+        return await data
 }
 
 //change this function to change cities
