@@ -12,6 +12,7 @@ const doc = {
 const forcastLength = 5;
 let woe = null;
 let Forecast = null;
+let process = false;
 //get WoeID
 const getWoe = async (Location) => {
     const data = await fetch(`https://www.metaweather.com/api/location/search/?query=${Location}`)
@@ -35,6 +36,7 @@ const getData = async (Location) => {
     woe = await getWoe(Location);
     if(!woe[0]?.title ||woe[0]?.title != Location) {
         alert("City not found")
+        process = false;
         return;
     }
     for(i = 0; i <= forcastLength; i++){
@@ -59,7 +61,6 @@ const cast = async (Location) =>{
 
 //change this function to change cities
 document.addEventListener('DOMContentLoaded', async() => {
-    
     setHtml();
     updatehtml("London");
 })
@@ -81,20 +82,25 @@ function setHtml(){
 
 async function updatehtml(cityName){
     Forecast = await cast(cityName).then(Forecast => {
+        doc.city[0].innerHTML = `Weather in ${woe[0].title}`
         for(i = 0; i <= forcastLength; i++){
-            doc.city[i].innerHTML = `Weather in ${woe[0].title}`
             doc.date[i].innerHTML = `${Forecast.consolidatedWeather[i].applicable_date}`
-            doc.temp[i].innerHTML = `${Forecast.consolidatedWeather[i].min_temp}\xB0/${Forecast.consolidatedWeather[i].max_temp}\xB0<span>C</span>`
+            doc.temp[i].innerHTML = `${Forecast.consolidatedWeather[i].min_temp}\xB0/${Forecast.consolidatedWeather[i].max_temp}\xB0C`
             doc.weatherimg[i].src = `https://www.metaweather.com/static/img/weather/png/64/${Forecast.consolidatedWeather[i].weather_state_abbr}.png`
             doc.weather[i].innerHTML = `${Forecast.consolidatedWeather[i].weather_state_name}`
             doc.humidity[i].innerHTML = `${Forecast.consolidatedWeather[i].humidity}`
             doc.windspeed[i].innerHTML = `${Forecast.consolidatedWeather[i].wind_speed} Mph`
             doc.airpressure[i].innerHTML = `${Forecast.consolidatedWeather[i].air_pressure} Mbar`
         } 
+        process = false
         return Forecast
     })
 }
 function updateCity(){
+    if(process){
+        alert("Please wait, processing previous request..")
+        return;
+    }else process = true
     setHtml();
-    updatehtml(doc.citysearch.value);
+    updatehtml(doc.citysearch.value);    
 }

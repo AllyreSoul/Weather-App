@@ -79,7 +79,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       margin: 0;
   }
   .card {
@@ -136,14 +135,21 @@
   }
   
   .weather loading {
-      flex: 1 1 100%;
-      padding: 30px 25px 25px;
+      flex: 1;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
       text-align: center;
   }
-  
+  .weather loading alt {
+      flex: 1;
+      max-width: 20%;
+      display: inline-block;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #000000;
+      
+  }
   h2.city {
       color: #FFF;
       font-size: 30px;
@@ -249,7 +255,18 @@
   .air-pressure span {
       font-size: 30px;
       font-weight: 600;
-  }</style>
+  }
+  .future-container{
+    max-width:100%;
+    max-height:500px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    flex-direction: row;
+    display:flex;
+    padding: 5px
+  }
+
+  </style>
     <title>School Project weather app </title>
      <script src = main.js></script>
      <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -263,7 +280,6 @@
               <li><a href="#">About</a></li>
             </ul>
           </nav>
-
           <div class="container">
             <div class="card">
               <div class="search">
@@ -288,9 +304,77 @@
                   <div class="wind">Wind speed: <span id="windspeed0">Loading...</span></div>
                   <div class="air-pressure">Air pressure: <span id="air-pressure0">Loading...</span></div>
                 </div>
+                </div>
               </div>
             </div>
           </div>
+          <div class="future-container">
+              <div class="weather loading alt">
+                <h3 class="date" id="date1">Loading...</h2>
+                <div class="air-pressure" id = "temp1">Loading...</div>
+                <div class="flex">
+                  <img id ="weatherimage1" src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
+                  <div class="description" id="weather1">Loading</div>
+                </div>
+                <div class="curren1t">
+                  <div class="humidity">Humidity: <span class="humidity" id="humidity1">Loading...</span></div>
+                  <div class="wind">Wind speed: <span class="wind" id="windspeed1">Loading...</span></div>
+                  <div class="air-pressure">Air pressure: <span class="air-pressure" id="air-pressure1">Loading...</span></div>
+                </div>
+              </div>
+                <div class="weather loading alt">
+                  <h3 class="date" id="date2">Loading...</h2>
+                  <div class="air-pressure" id = "temp2">Loading...</div>
+                  <div class="flex">
+                    <img id ="weatherimage2" src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
+                    <div class="description" id="weather2">Loading</div>
+                  </div>
+                  <div class="curren1t">
+                    <div class="humidity">Humidity: <span class="humidity" id="humidity2">Loading...</span></div>
+                    <div class="wind">Wind speed: <span class="wind" id="windspeed2">Loading...</span></div>
+                    <div class="air-pressure">Air pressure: <span class="air-pressure" id="air-pressure2">Loading...</span></div>
+                  </div>
+                </div>
+                <div class="weather loading alt">
+                  <h3 class="date" id="date3">Loading...</h2>
+                  <div class="air-pressure" id = "temp3">Loading...</div>
+                  <div class="flex">
+                    <img id ="weatherimage3" src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
+                    <div class="description" id="weather3">Loading</div>
+                  </div>
+                  <div class="curren1t">
+                    <div class="humidity">Humidity: <span class="humidity" id="humidity3">Loading...</span></div>
+                    <div class="wind">Wind speed: <span class="wind" id="windspeed3">Loading...</span></div>
+                    <div class="air-pressure">Air pressure: <span class="air-pressure" id="air-pressure3">Loading...</span></div>
+                  </div>
+                </div>
+                <div class="weather loading alt">
+                  <h3 class="date" id="date4">Loading...</h2>
+                  <div class="air-pressure" id = "temp4">Loading...</div>
+                  <div class="flex">
+                    <img id ="weatherimage4" src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
+                    <div class="description" id="weather4">Loading</div>
+                  </div>
+                  <div class="curren1t">
+                    <div class="humidity">Humidity: <span class="humidity" id="humidity4">Loading...</span></div>
+                    <div class="wind">Wind speed: <span class="wind" id="windspeed4">Loading...</span></div>
+                    <div class="air-pressure">Air pressure: <span class="air-pressure" id="air-pressure4">Loading...</span></div>
+                  </div>
+                </div>
+                <div class="weather loading alt">
+                  <h3 class="date" id="date5">Loading...</h2>
+                  <div class="air-pressure" id = "temp5">Loading...</div>
+                  <div class="flex">
+                    <img id ="weatherimage5" src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
+                    <div class="description" id="weather5">Loading</div>
+                  </div>
+                  <div class="curren1t">
+                    <div class="humidity">Humidity: <span class="humidity" id="humidity5">Loading...</span></div>
+                    <div class="wind">Wind speed: <span class="wind" id="windspeed5">Loading...</span></div>
+                    <div class="air-pressure">Air pressure: <span class="air-pressure" id="air-pressure5">Loading...</span></div>
+                  </div>
+                </div>
+              </div>
     </body>
 </body>
 </html>
