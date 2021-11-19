@@ -15,14 +15,14 @@ let Forecast = null;
 let process = false;
 //get WoeID
 const getWoe = async (Location) => {
-    const data = await fetch(`http://cors.io/?https://www.metaweather.com/api/location/search/?query=${Location}`)
+    const data = await fetch(`https://www.metaweather.com/api/location/search/?query=${Location}`)
     .then(async (res) => await res.json())
     .then(async (json) => await json);
     return data;
 }
 
 const getForecast = async (Location, Date) => {
-    const data = await fetch(`http://cors.io/?https://www.metaweather.com/api/location/${Location}/${Date}/`)
+    const data = await fetch(`https://www.metaweather.com/api/location/${Location}/${Date}/`)
     .then(async (res) => await res.json())
     .then(async (json) => await json);
     return data;
@@ -81,12 +81,12 @@ function setHtml(){
 }
 
 async function updatehtml(cityName){
-    Forecast = await cast(cityName).then(Forecast => {
+    Forecast = await cast(capitalizeFirstLetter(cityName)).then(Forecast => {
         doc.city[0].innerHTML = `Weather in ${woe[0].title}`
         for(i = 0; i <= forcastLength; i++){
             doc.date[i].innerHTML = `${Forecast.consolidatedWeather[i].applicable_date}`
             doc.temp[i].innerHTML = `${Forecast.consolidatedWeather[i].min_temp}\xB0/${Forecast.consolidatedWeather[i].max_temp}\xB0C`
-            doc.weatherimg[i].src = `http://cors.io/?https://www.metaweather.com/static/img/weather/png/64/${Forecast.consolidatedWeather[i].weather_state_abbr}.png`
+            doc.weatherimg[i].src = `https://www.metaweather.com/static/img/weather/png/64/${Forecast.consolidatedWeather[i].weather_state_abbr}.png`
             doc.weather[i].innerHTML = `${Forecast.consolidatedWeather[i].weather_state_name}`
             doc.humidity[i].innerHTML = `${Forecast.consolidatedWeather[i].humidity}`
             doc.windspeed[i].innerHTML = `${Forecast.consolidatedWeather[i].wind_speed} Mph`
@@ -104,3 +104,7 @@ function updateCity(){
     setHtml();
     updatehtml(doc.citysearch.value);    
 }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
