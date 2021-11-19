@@ -5,6 +5,251 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>* {
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      list-style: none;
+      box-sizing: border-box;
+  }
+  
+  body {
+      font-family: 'montserrat', sans-serif;
+      background: rgba(255, 255, 255, 0.6);
+      background-image: url('https://source.unsplash.com/1600x900/?skies');
+      background-size: cover;
+  }
+  
+  nav{
+      background: rgba(34, 34, 34, 0.6);
+      height: 60px;
+      width: 100%;
+      border-bottom: 3px solid #ffffff;
+  }
+  
+  label.logo {
+      color: white;
+      font-style: oblique;
+      font-size: 35px;
+      line-height: 60px;
+      margin-left: 20px;
+      padding-top: 100px 0px;
+      font-weight: bold;
+  }
+  
+  nav ul {
+      float: right;
+      margin-right: 20px;
+  }
+  
+  nav ul li {
+      display: inline-block;
+      line-height: 60px;
+      margin: 0 5px;
+  }
+  
+  nav ul li a {
+      color: white;
+      font-size: 17px;
+      padding: 7px 13px;
+      border-radius: 3px;
+      text-transform: uppercase;
+  }
+  
+  a.home,a:hover {
+      background: rgba(119, 119, 119);
+      transition: .5s;
+  }
+  
+  .checkbtn {
+      font-size: 30px;
+      color: white;
+      float: right;
+      line-height: 80px;
+      margin-right: 40px;
+      cursor: pointer;
+      display: none;
+  }
+  
+  #check {
+      display: none;
+  }
+  
+  .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+  }
+  .card {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+  }
+  
+  .card {
+    color: white;
+    padding: 2em;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 420px;
+    margin: 1em;
+  }
+  
+  .search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  
+  input.search-bar {
+      width: 200%;
+      max-width: 280px;
+      padding: 15px 20px;
+      border: none;
+      outline: none;
+      background-color: rgba(34, 34, 34, 0.6);
+      border-radius: 16px 0px 0px 16px;
+      border-bottom: 3px solid #ffffff;
+  
+      color: #cccccc;
+      font-size: 105%;
+      font-weight: 300;
+      transition: 0.2s ease-in-out;
+  }
+  
+  button {
+      margin: 0.5em;
+      border-radius: 0px 16px 16px 0px;
+      border: none;
+      height: 50px;
+      width: 60px;
+      outline: none;
+      background-color: rgba(34, 34, 34, 0.6);
+      border-bottom: 3px solid #ffffff;
+      color: #cccccc;
+      transition: 0.2s ease-in-out;
+  }
+  
+  .weather loading {
+      flex: 1 1 100%;
+      padding: 30px 25px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+  
+  h2.city {
+      color: #FFF;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 5px;
+      text-shadow: 2px 2px rgba(34, 34, 34, 0.6);
+  }
+  
+  h3.date {
+      color: #FFF;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 0px;
+  }
+  
+  h1.temp {
+      color: #FFF;
+      font-size: 102px;
+      font-weight: 900;
+      margin: 10px 0px;
+      text-shadow: 2px 10px rgba(34, 34, 34, 0.6);
+      align-items: center;
+      text-align: center;
+  }
+  
+  h1.temp span {
+      font-size: 60px;
+  }
+  
+  .icon {
+      text-align: center;
+      padding: 5px;
+      width: 150px;
+      padding-top: 5px;
+  }
+  
+  .current {
+      display: flex;
+      justify-content: space-evenly;
+      text-align: center;
+      flex-direction: row;
+  }
+  
+  .flex {
+      color: rgb(255, 255, 255);
+      font-size: 32px;
+      font-weight: 700;
+      font-style: oblique;
+      margin-bottom: 15px;
+      text-shadow: 2px 5px rgba(34, 34, 34, 0.6);
+  }
+  
+  .current {
+      width: 100%;
+      position: relative;
+      padding-top: 10px;
+      color: white;
+      text-align: left;
+  }
+  
+  .current::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: white;
+  }
+  
+  
+  .humidity {
+      color: white;
+      font-size: 22px;
+      font-weight: 500;
+      text-shadow: 0px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .humidity span {
+      font-size: 30px;
+      font-weight: 600;
+  }
+  
+  .wind {
+      color: white;
+      font-size: 22px;
+      font-weight: 500;
+      text-shadow: 0px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .wind span {
+      font-size: 30px;
+      font-weight: 600;
+  }
+  
+  .air-pressure {
+      color: white;
+      font-size: 22px;
+      font-weight: 500;
+      text-shadow: 0px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .air-pressure span {
+      font-size: 30px;
+      font-weight: 600;
+  }</style>
     <title>School Project weather app </title>
      <script src = main.js></script>
      <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -35,7 +280,7 @@
                 <h3 class="date">18 November 2021</h2>
                 <h1 class="temp">33°/24°<span>C</span></h1>
                 <div class="flex">
-                  <img src="./img/sunnycloudyy.png" alt="" class="icon" />
+                  <img src="https://www.metaweather.com/static/img/weather/png/64/sn.png" alt="" class="icon"/>
                   <div class="description">Sunny Cloudy</div>
                 </div>
                 <div class="current">

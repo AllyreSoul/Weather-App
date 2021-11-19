@@ -17,7 +17,6 @@ const getData = async (Location) => {
         consolidatedWeather:[],
     }
     const woeID = await getWoe(Location);
-    console.log(woeID)
     for(i = 0; i <= 5; i++){
         var today = new Date();
         var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+i);
