@@ -1,13 +1,29 @@
-
+const doc = {
+    city:[],
+    date:[],
+    temp:[],
+    weatherimg:[],
+    weather:[],
+    humidity:[],
+    windspeed:[],
+    airpressure:[],
+    citysearch:""
+}
+const forcastLength = 5;
+let woe = null;
 let Forecast = null;
 //get WoeID
 const getWoe = async (Location) => {
-    const data = await fetch(`https://www.metaweather.com/api/location/search/?query=${Location}`).then(async (res) => await res.json()).then(async (json) => await json);
+    const data = await fetch(`https://www.metaweather.com/api/location/search/?query=${Location}`)
+    .then(async (res) => await res.json())
+    .then(async (json) => await json);
     return data;
 }
 
 const getForecast = async (Location, Date) => {
-    const data = await fetch(`https://www.metaweather.com/api/location/${Location}/${Date}/`).then(async (res) => await res.json()).then(async (json) => await json);
+    const data = await fetch(`https://www.metaweather.com/api/location/${Location}/${Date}/`)
+    .then(async (res) => await res.json())
+    .then(async (json) => await json);
     return data;
 }
 
@@ -16,14 +32,23 @@ const getData = async (Location) => {
     const output = {
         consolidatedWeather:[],
     }
-    const woeID = await getWoe(Location);
-    for(i = 0; i <= 5; i++){
+    woe = await getWoe(Location);
+    if(!woe[0]?.title ||woe[0]?.title != Location) {
+        alert("City not found")
+        return;
+    }
+    for(i = 0; i <= forcastLength; i++){
         var today = new Date();
         var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+(today.getDate()+i);
-        let result = await getForecast(woeID[0].woeid, date);
+        let result = await getForecast(woe[0].woeid, date);
+        result[0].min_temp = Math.ceil(result[0].min_temp);
+        result[0].max_temp = Math.ceil(result[0].max_temp);
+        result[0].wind_speed = Math.ceil(result[0].wind_speed);
+        result[0].air_pressure = Math.ceil(result[0].air_pressure);
         output.consolidatedWeather[i] = result[0];
         
     };
+    console.log(woe);
     return output;
 }
 
@@ -34,5 +59,42 @@ const cast = async (Location) =>{
 
 //change this function to change cities
 document.addEventListener('DOMContentLoaded', async() => {
-    Forecast = await cast("London");
+    
+    setHtml();
+    updatehtml("London");
 })
+
+function setHtml(){
+    for(i = 0; i <= forcastLength; i++){
+    doc.city[i] = document.getElementById(`city${i}`);
+    doc.date[i] = document.getElementById(`date${i}`);
+    doc.temp[i] = document.getElementById(`temp${i}`);
+    doc.weatherimg[i] = document.getElementById(`weatherimage${i}`);
+    doc.weather[i] = document.getElementById(`weather${i}`);
+    doc.humidity[i] = document.getElementById(`humidity${i}`);
+    doc.windspeed[i] = document.getElementById(`windspeed${i}`)
+    doc.airpressure[i] = document.getElementById(`air-pressure${i}`);
+    doc.citysearch = document.getElementById("citySearch")
+    }
+    console.log(doc);
+}
+
+async function updatehtml(cityName){
+    Forecast = await cast(cityName).then(Forecast => {
+        for(i = 0; i <= forcastLength; i++){
+            doc.city[i].innerHTML = `Weather in ${woe[0].title}`
+            doc.date[i].innerHTML = `${Forecast.consolidatedWeather[i].applicable_date}`
+            doc.temp[i].innerHTML = `${Forecast.consolidatedWeather[i].min_temp}\xB0/${Forecast.consolidatedWeather[i].max_temp}\xB0<span>C</span>`
+            doc.weatherimg[i].src = `https://www.metaweather.com/static/img/weather/png/64/${Forecast.consolidatedWeather[i].weather_state_abbr}.png`
+            doc.weather[i].innerHTML = `${Forecast.consolidatedWeather[i].weather_state_name}`
+            doc.humidity[i].innerHTML = `${Forecast.consolidatedWeather[i].humidity}`
+            doc.windspeed[i].innerHTML = `${Forecast.consolidatedWeather[i].wind_speed} Mph`
+            doc.airpressure[i].innerHTML = `${Forecast.consolidatedWeather[i].air_pressure} Mbar`
+        } 
+        return Forecast
+    })
+}
+function updateCity(){
+    setHtml();
+    updatehtml(doc.citysearch.value);
+}
