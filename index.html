@@ -295,13 +295,14 @@
 
   </style>
     <title>School Project weather app </title>
-     <script src = main.js></script>
-     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-     <script>
-       $(window).on("load", function(){
-         $(".loader-wrapper").fadeOut("Slow")
-       });
-     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = main.js></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+      $(window).on("load", function(){
+        $(".loader-wrapper").fadeOut("Slow")
+      });
+    </script>
 </head>
 <body>
   <nav>
@@ -337,7 +338,7 @@
                   <div class="air-pressure">Air pressure: <span id="air-pressure0">Loading...</span></div>
                 </div>
                 </div>
-                <div class="loader-wrapper">
+                <div class="loader-wrapper" id="load">
                   <div class="loader">
                   </div>
                 </div>
