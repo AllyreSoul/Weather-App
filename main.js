@@ -63,7 +63,6 @@ const cast = async (Location) =>{
 document.addEventListener('DOMContentLoaded', async() => {
     setHtml();
     updatehtml("London");
-    fadeOut;
 })
 
 function setHtml(){
@@ -109,7 +108,3 @@ function updateCity(){
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
-function fadeLoader(){
-    $('load').fadeOut('slow')
-}
